@@ -1,9 +1,8 @@
 package com.example.lab_week_02_b
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +16,9 @@ class Result_Activity : AppCompatActivity() {
         private const val COLOR_KEY = "COLOR_KEY"
         private const val ERROR_KEY = "ERROR_KEY"
     }
+
+    private val returnButton : Button
+        get() = findViewById(R.id.return_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +41,17 @@ class Result_Activity : AppCompatActivity() {
                 Intent().let {
                     errorIntent ->
                     errorIntent.putExtra(ERROR_KEY, true)
-                    setResult(Activity.RESULT_OK, errorIntent)
+                    setResult(RESULT_OK, errorIntent)
                     finish()
                 }
             }
 
             val resultMessage = findViewById<TextView>(R.id.color_code_result_message)
             resultMessage.text = getString(R.string.color_code_result_message, colorCode?.uppercase())
+        }
+
+        returnButton.setOnClickListener {
+            this.finish()
         }
     }
 }
